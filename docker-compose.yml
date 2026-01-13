@@ -1,0 +1,4 @@
+services:
+  ftp-client:
+    build: ./ftp-client
+    container_name: inquisitor-ftp-client
