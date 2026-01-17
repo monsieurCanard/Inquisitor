@@ -1,3 +1,4 @@
+sleep infinity
 while true; do
 	echo "coucou" > /tmp/file.txt &&
 	chmod 755 /tmp/file.txt &&

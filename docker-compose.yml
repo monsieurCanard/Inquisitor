@@ -3,6 +3,11 @@ services:
     build: inquisitor/
     networks:
       - inquisitor-net
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    sysctls:
+      net.ipv4.ip_forward: "1"
   ftp-client:
     build: ftp-client/
     ports:
