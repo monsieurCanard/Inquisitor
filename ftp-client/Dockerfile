@@ -1,8 +1,11 @@
-FROM ubuntu-slim:latest
+FROM ubuntu:22.04
 
 RUN apt-get update && \
-		apt-get install -y filezilla && \
+		apt-get install -y lftp && \
 		apt-get clean && \
 		rm -rf /var/lib/apt/lists/*
 
-CMD ["filezilla"]
+COPY send_loop.sh .
+RUN chmod +x send_loop.sh
+
+ENTRYPOINT ["bash", "send_loop.sh"]

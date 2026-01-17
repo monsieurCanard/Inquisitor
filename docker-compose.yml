@@ -1,4 +1,27 @@
 services:
+  inquisitor:
+    build: inquisitor/
+    networks:
+      - inquisitor-net
   ftp-client:
-    build: ./ftp-client
-    container_name: inquisitor-ftp-client
+    build: ftp-client/
+    ports:
+      - "5800:5800"
+    networks:
+      - inquisitor-net
+    depends_on:
+      - ftp-server
+  ftp-server:
+    image: kibatic/proftpd
+    networks:
+      - inquisitor-net
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    environment:
+      FTP_LIST: "inquisitor:pass7"
+    restart: always
+
+networks:
+  inquisitor-net:
+    driver: bridge
